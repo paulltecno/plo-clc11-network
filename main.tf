@@ -1,14 +1,39 @@
+
+locals {
+    common_tags = {
+        "Team" = "Devops"
+        "Scope" = "Infraestrura"
+        "CC" = "11502"
+    }
+}
+
 resource "aws_vpc" "minha_vpc" {
   cidr_block = var.vpc_range
-
   tags = {
     Name = var.vpc_name
   }
 }
 
+# Correcao primeira issue
+resource "aws_flow_log" "example" {
+  log_destination      = "arn:aws:s3:::vinicius-clc11-tfstate"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = aws_vpc.minha_vpc.id
+}
+
+# Correcao segunda issue
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.minha_vpc.id
+  
+  tags = {
+    Name = "my-iac-sg"
+  }
+}
+
 resource "aws_subnet" "public-subnet-1a" {
-  vpc_id     = aws_vpc.minha_vpc.id
-  cidr_block = var.public_subnet_1a_range
+  vpc_id            = aws_vpc.minha_vpc.id
+  cidr_block        = var.public_subnet_1a_range
   availability_zone = "us-east-1a"
 
   tags = {
@@ -17,8 +42,8 @@ resource "aws_subnet" "public-subnet-1a" {
 }
 
 resource "aws_subnet" "public-subnet-1c" {
-  vpc_id     = aws_vpc.minha_vpc.id
-  cidr_block = "10.0.20.0/24"
+  vpc_id            = aws_vpc.minha_vpc.id
+  cidr_block        = "10.0.20.0/24"
   availability_zone = "us-east-1c"
 
   tags = {
@@ -27,8 +52,8 @@ resource "aws_subnet" "public-subnet-1c" {
 }
 
 resource "aws_subnet" "private-subnet-1a" {
-  vpc_id     = aws_vpc.minha_vpc.id
-  cidr_block = "10.0.100.0/24"
+  vpc_id            = aws_vpc.minha_vpc.id
+  cidr_block        = "10.0.100.0/24"
   availability_zone = "us-east-1a"
 
   tags = {
@@ -37,8 +62,8 @@ resource "aws_subnet" "private-subnet-1a" {
 }
 
 resource "aws_subnet" "private-subnet-1c" {
-  vpc_id     = aws_vpc.minha_vpc.id
-  cidr_block = "10.0.200.0/24"
+  vpc_id            = aws_vpc.minha_vpc.id
+  cidr_block        = "10.0.200.0/24"
   availability_zone = "us-east-1a"
 
   tags = {
@@ -77,6 +102,7 @@ resource "aws_route_table_association" "public-1c" {
   route_table_id = aws_route_table.public_rt.id
 }
 
+
 resource "aws_eip" "ip_nat_1a" {
   domain           = "vpc"
 }
@@ -102,6 +128,7 @@ resource "aws_nat_gateway" "natgateway_1c" {
     Name = "iac-natgatway-1c"
   }
 }
+
 
 resource "aws_route_table" "private_rt_1a" {
   vpc_id = aws_vpc.minha_vpc.id
@@ -140,6 +167,26 @@ resource "aws_route_table_association" "private-1c" {
 }
 
 
+
+
+
+
+
+###################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ######## OUTPUT SESSION ########
 
 output "vpc_id" {
@@ -148,5 +195,3 @@ output "vpc_id" {
 output "vpc_arn" {
   value = "Minha vpc arn: ${aws_vpc.minha_vpc.arn}"
 }
-
-

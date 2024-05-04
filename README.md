@@ -34,7 +34,6 @@ No modules.
 | [aws_subnet.private-subnet-1c](https://registry.terraform.io/providers/hashicorp/aws/5.45.0/docs/resources/subnet) | resource |
 | [aws_subnet.public-subnet-1a](https://registry.terraform.io/providers/hashicorp/aws/5.45.0/docs/resources/subnet) | resource |
 | [aws_subnet.public-subnet-1c](https://registry.terraform.io/providers/hashicorp/aws/5.45.0/docs/resources/subnet) | resource |
-| [aws_vpc.main](https://registry.terraform.io/providers/hashicorp/aws/5.45.0/docs/resources/vpc) | resource |
 | [aws_vpc.minha_vpc](https://registry.terraform.io/providers/hashicorp/aws/5.45.0/docs/resources/vpc) | resource |
 
 ## Inputs
@@ -45,7 +44,7 @@ No modules.
 | <a name="input_private_subnet_1c_range"></a> [private\_subnet\_1c\_range](#input\_private\_subnet\_1c\_range) | n/a | `string` | `"10.0.200.0/24"` | no |
 | <a name="input_public_subnet_1a_range"></a> [public\_subnet\_1a\_range](#input\_public\_subnet\_1a\_range) | n/a | `string` | `"10.0.10.0/24"` | no |
 | <a name="input_public_subnet_1c_range"></a> [public\_subnet\_1c\_range](#input\_public\_subnet\_1c\_range) | n/a | `string` | `"10.0.20.0/24"` | no |
-| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Nome da sua VPC | `string` | n/a | yes |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Nome da sua VPC | `string` | `"vpc_vinicius_iac_clc11"` | no |
 | <a name="input_vpc_range"></a> [vpc\_range](#input\_vpc\_range) | n/a | `string` | `"10.0.0.0/16"` | no |
 
 ## Outputs
